@@ -1,0 +1,28 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source:
+    url: https://raw.githubusercontent.com/aakash-tsx/Datasets/refs/heads/main/IMDB%20Dataset.csv
+  download_path: artifacts/data_ingestion/data.csv
+
+data_validation:
+  data_path: artifacts/data_ingestion/data.csv
+
+data_preprocessing:
+  root_dir: artifacts/data_preprocessing
+  data_path: artifacts/data_ingestion/data.csv
+  tokenizer_path: artifacts/data_preprocessing
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  data_path: artifacts/data_preprocessing/data.pt
+
+model_training:
+  root_dir: artifacts/model
+  data_path: artifacts/data_transformation/data.pt
+  tokenizer_path: artifacts/data_preprocessing/tokenizer
+
+prediction:
+  model_path: artifacts/model/model.pth
+  tokenizer_path: artifacts/data_preprocessing/tokenizer
