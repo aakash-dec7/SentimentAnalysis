@@ -1,0 +1,97 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/sentana/component/s1_data_ingestion.py
+    deps:
+    - path: src/sentana/component/s1_data_ingestion.py
+      hash: md5
+      md5: 33b7a528941205be40c9def12d7895bc
+      size: 2435
+    outs:
+    - path: artifacts/data_ingestion
+      hash: md5
+      md5: fd4393b82f3999d008190ff5d0fdfeb0.dir
+      size: 13239263
+      nfiles: 1
+  data_validation:
+    cmd: python src/sentana/component/s2_data_validation.py
+    deps:
+    - path: artifacts/data_ingestion
+      hash: md5
+      md5: fd4393b82f3999d008190ff5d0fdfeb0.dir
+      size: 13239263
+      nfiles: 1
+    - path: src/sentana/component/s2_data_validation.py
+      hash: md5
+      md5: 5ffe14625899ecd79f480c77259ad2f5
+      size: 2808
+  data_preprocessing:
+    cmd: python src/sentana/component/s3_data_preprocessing.py
+    deps:
+    - path: artifacts/data_ingestion
+      hash: md5
+      md5: fd4393b82f3999d008190ff5d0fdfeb0.dir
+      size: 13239263
+      nfiles: 1
+    - path: src/sentana/component/s3_data_preprocessing.py
+      hash: md5
+      md5: b2d4756cecbe768062b08ec524e710d3
+      size: 5686
+    outs:
+    - path: artifacts/data_preprocessing
+      hash: md5
+      md5: 33e2fe303bbd117217589fd379d08e51.dir
+      size: 953596
+      nfiles: 6
+  data_transformation:
+    cmd: python src/sentana/component/s4_data_transformation.py
+    deps:
+    - path: artifacts/data_preprocessing
+      hash: md5
+      md5: 33e2fe303bbd117217589fd379d08e51.dir
+      size: 953596
+      nfiles: 6
+    - path: src/sentana/component/s4_data_transformation.py
+      hash: md5
+      md5: 0dad89f42b297b27052b3beddf46a992
+      size: 3599
+    outs:
+    - path: artifacts/data_transformation
+      hash: md5
+      md5: b880fe7424ba6e4a50818938d4f8209d.dir
+      size: 15838
+      nfiles: 1
+  model:
+    cmd: python src/sentana/component/model.py
+    deps:
+    - path: artifacts/data_transformation
+      hash: md5
+      md5: b880fe7424ba6e4a50818938d4f8209d.dir
+      size: 15838
+      nfiles: 1
+    - path: src/sentana/component/model.py
+      hash: md5
+      md5: 08209c3623995c9ab8531d33afadf950
+      size: 2095
+  model_training:
+    cmd: python src/sentana/component/s5_model_training.py
+    deps:
+    - path: artifacts/data_transformation
+      hash: md5
+      md5: b880fe7424ba6e4a50818938d4f8209d.dir
+      size: 15838
+      nfiles: 1
+    - path: src/sentana/component/model.py
+      hash: md5
+      md5: 08209c3623995c9ab8531d33afadf950
+      size: 2095
+    - path: src/sentana/component/s5_model_training.py
+      hash: md5
+      md5: c019894b8979aff9a453e397b3c1a13b
+      size: 4208
+    outs:
+    - path: artifacts/model
+      hash: md5
+      md5: aad538f039a8bf477ee207ac316cca20.dir
+      size: 1793456573
+      nfiles: 7
