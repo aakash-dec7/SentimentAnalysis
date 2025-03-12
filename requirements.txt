@@ -1,0 +1,14 @@
+datasets
+ensure
+Flask
+torch
+pandas
+python_box
+PyYAML
+PyYAML
+setuptools
+sentencepiece
+accelerate>=0.26.0
+transformers
+dvc
+-e .
