@@ -227,7 +227,7 @@ Copy the `EXTERNAL-IP` and append `:5000` to access the application:
 http://<EXTERNAL-IP>:5000
 ```
 
-The Sentiment-Analysis model is now deployed and accessible online.
+The SentimentAnalysis model is now deployed and accessible online.
 
 ## License
 
