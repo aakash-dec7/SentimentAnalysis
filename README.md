@@ -1,25 +1,25 @@
 # Sentiment Analysis
 
-This repository contains a BERT-based model for sentiment analysis on the IMDB dataset. The model is implemented using PyTorch and follows a modular structure for improved readability, maintainability, and scalability.
+This repository contains a **BERT-based sentiment analysis model** trained on the **IMDB dataset**. The model is implemented using **PyTorch** and follows a **modular architecture** for enhanced readability, maintainability, and scalability.
 
 ## Features
 
-- **PyTorch** implementation.
-- **Data Version Control (DVC)** for managing training and evaluation pipelines.
-- **BERT Tokenizer**: Utilizes the `bert-base-uncased` tokenizer for efficient text processing.
-- **MLflow and DagsHub** for experiment tracking and model management.
+- **PyTorch** implementation for efficient deep learning workflows.
+- **Data Version Control (DVC)** to manage training and evaluation pipelines.
+- **BERT Tokenizer** (`bert-base-uncased`) for robust text processing.
+- **MLflow & DagsHub** for experiment tracking and model management.
 - **Amazon Elastic Container Registry (ECR)** for storing Docker images.
 - **Amazon Elastic Kubernetes Service (EKS)** for deploying the model as a containerized application.
-- **Complete CI/CD Implementation** using AWS and GitHub Actions for automated deployment.
+- **CI/CD Pipeline** using **GitHub Actions** for automated deployment on AWS.
 
 ## Prerequisites
 
-Ensure the following dependencies and services are installed and configured:
+Ensure you have the following dependencies and services installed and configured:
 
 - Python 3.10
-- AWS Account
+- AWS Account with necessary IAM permissions
 - AWS CLI
-- Docker Desktop (for local image testing)
+- Docker Desktop (for local testing)
 - DagsHub Account (for experiment tracking)
 - Git
 
@@ -28,33 +28,33 @@ Ensure the following dependencies and services are installed and configured:
 **Source:** [IMDB Movies Dataset](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews/data)
 
 **Description:**
-The dataset comprises two columns:
+The dataset consists of two columns:
 
-- **Review**
-- **Sentiment**
+- **Review**: Textual movie reviews.
+- **Sentiment**: Labels (Positive/Negative).
 
 ## Model Architecture
 
-The architecture consists of the following components:
+The sentiment analysis model consists of the following components:
 
 ### 1. Base Model (BERT)
 
-- Uses a pre-trained BERT model from Hugging Face’s `transformers` library.
-- Loads the configuration dynamically via `AutoConfig`.
-- Extracts contextualized word representations from the input sequence.
+- Uses a pre-trained **BERT model** from Hugging Face's `transformers` library.
+- Dynamically loads configurations via `AutoConfig`.
+- Extracts **contextualized word representations** from input sequences.
 
 ### 2. Custom Fully Connected Layers
 
-- A feed-forward network is added after the BERT encoder output:
-  - **Linear Layer 1:** Maps BERT’s hidden size to 1024 neurons.
-  - **ReLU Activation:** Introduces non-linearity for better feature representation.
-  - **Linear Layer 2:** Projects 1024 neurons to `out_features` (number of output classes).
+- A feed-forward network is added after the BERT encoder:
+  - **Linear Layer 1:** Projects BERT’s hidden size (768) to 1024 neurons.
+  - **ReLU Activation:** Introduces non-linearity.
+  - **Linear Layer 2:** Maps 1024 neurons to `out_features` (number of classes).
   - **Dropout Layer:** Prevents overfitting by randomly deactivating neurons.
 
 ### 3. Classifier Head
 
-- The original BERT classification head is replaced with a custom linear layer:
-  - **Linear Layer:** Maps `out_features` to `out_features` (ensuring compatibility with the new architecture).
+- Replaces the original BERT classification head with a custom linear layer:
+  - **Linear Layer:** Ensures compatibility with the new architecture.
 
 #### Model Summary
 
@@ -138,39 +138,37 @@ dvc init
 ## DVC Pipeline Stages
 
 1. **Data Ingestion** - Fetches and stores the raw dataset.
-2. **Data Validation** - Ensures data quality and integrity before processing.
-3. **Data Preprocessing** - Cleans, tokenizes, and prepares the dataset for transformation.
-4. **Data Transformation** - Converts processed data into a format suitable for model training.
+2. **Data Validation** - Ensures data quality and integrity.
+3. **Data Preprocessing** - Cleans, tokenizes, and prepares the dataset.
+4. **Data Transformation** - Converts processed data into a model-friendly format.
 5. **Model Definition** - Defines the model architecture.
-6. **Model Training** - Trains the model using the tranformers trainer.
+6. **Model Training** - Trains the model using the **Hugging Face Trainer API**.
 
-### Run Model Training and Evaluation
+### Run Training and Evaluation
 
 ```sh
 dvc repro
 ```
 
-The trained model will be saved in the project directory: `artifacts/model/model.pth`
+The trained model will be saved in: `artifacts/model/model.pth`
 
 ## Deployment
 
-### Create an ECR Repository
+### 1. Create an Amazon ECR Repository
 
-Create an Amazon ECR repository with the same name as specified in `setup.py`:
+Ensure the ECR repository name matches the project name defined in `setup.py`:
 
 ```python
 setup(
     name="sentana",
     version="1.0.0",
-    author="Aakash Singh",
-    author_email="aakash.dec7@gmail.com",
     packages=find_packages(),
 )
 ```
 
-### Create an EKS Cluster
+### 2. Create an Amazon EKS Cluster
 
-Execute the following command to create an Amazon EKS cluster:
+Use the following command to create an **Amazon EKS cluster**:
 
 ```sh
 eksctl create cluster --name <cluster-name> \
@@ -183,9 +181,9 @@ eksctl create cluster --name <cluster-name> \
     --managed
 ```
 
-### Push Code to GitHub
+### 3. Push Code to GitHub
 
-Before pushing the code, ensure that the necessary GitHub Actions secrets are added under **Settings > Secrets and Variables > Actions**:
+Before pushing, add **GitHub Actions secrets** in **Settings > Secrets and Variables > Actions**:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
@@ -200,13 +198,13 @@ git commit -m "Initial commit"
 git push origin main
 ```
 
-### CI/CD Automation
+### 4. CI/CD Automation
 
-GitHub Actions will automate the CI/CD process, ensuring that the model is built, tested, and deployed on the EKS cluster.
+GitHub Actions will automate the CI/CD process, ensuring that the model is built, tested, and deployed to **Amazon EKS**.
 
 ## Accessing the Deployed Application
 
-Once deployment is successful:
+Once deployed, follow these steps:
 
 1. Navigate to **EC2 Instances** in the **AWS Console**.
 2. Go to **Security Groups** and update inbound rules to allow traffic.
@@ -223,4 +221,8 @@ Copy the `EXTERNAL-IP` and append `:5000` to access the application:
 http://<EXTERNAL-IP>:5000
 ```
 
-Your English-to-French translation application is now deployed and accessible online.
+Your sentiment analysis model is now deployed and accessible online.
+
+## License
+
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
