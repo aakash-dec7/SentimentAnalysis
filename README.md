@@ -34,7 +34,7 @@ Ensure the following dependencies and services are installed and configured:
 **Source:** [IMDB Movies Dataset](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews/data)
 
 **Description:**
-The dataset consists of two columns:
+The dataset consists of:
 
 - **Review**
 - **Sentiment**
@@ -156,13 +156,17 @@ dvc init
 dvc repro
 ```
 
-The trained model will be saved in: `artifacts/model/model.pth`
+The trained model will be saved in:
+
+```sh
+artifacts/model/model.pth
+```
 
 ## Deployment
 
 ### 1. Create an Amazon ECR Repository
 
-Ensure the ECR repository name matches the project name defined in `setup.py`:
+Ensure that the Amazon ECR repository exists with the appropriate name as specified in `setup.py`:
 
 ```python
 setup(
@@ -174,7 +178,7 @@ setup(
 
 ### 2. Create an Amazon EKS Cluster
 
-Use the following command to create an **Amazon EKS cluster**:
+Execute the following command to create an Amazon EKS cluster:
 
 ```sh
 eksctl create cluster --name <cluster-name> \
@@ -189,7 +193,7 @@ eksctl create cluster --name <cluster-name> \
 
 ### 3. Push Code to GitHub
 
-Before pushing, add **GitHub Actions secrets** in **Settings > Secrets and Variables > Actions**:
+Before pushing the code, ensure that the necessary GitHub Actions secrets are added under **Settings > Secrets and Variables > Actions**:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
@@ -227,7 +231,7 @@ Copy the `EXTERNAL-IP` and append `:5000` to access the application:
 http://<EXTERNAL-IP>:5000
 ```
 
-The SentimentAnalysis application is now deployed and accessible online.
+The Sentiment Analysis application is now deployed and accessible online.
 
 ## License
 
