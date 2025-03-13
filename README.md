@@ -35,7 +35,7 @@ The dataset consists of two columns:
 
 ## Model Architecture
 
-The SentimentAnalysis model consists of the following components:
+The **SentimentAnalysis** model consists of the following components:
 
 ### 1. Base Model (BERT)
 
