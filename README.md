@@ -120,7 +120,7 @@ Clone the repository:
 
 ```sh
 git clone https://github.com/aakash-dec7/SentimentAnalysis.git
-cd SequenceToSequence
+cd SentimentAnalysis
 ```
 
 ### Install Dependencies
