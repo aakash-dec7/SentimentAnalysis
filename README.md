@@ -1,27 +1,27 @@
 # Sentiment Analysis
 
-This repository contains a **BERT-based sentiment analysis model** trained on the **IMDB dataset**. The model is implemented using **PyTorch** and follows a **modular architecture** for enhanced readability, maintainability, and scalability.
+This repository contains a **BERT-based** sentiment analysis model trained on the **IMDB dataset**. The model is implemented using `PyTorch` and follows a modular architecture for enhanced readability, maintainability, and scalability.
 
 ## Features
 
-- **PyTorch** implementation for efficient deep learning workflows.
-- **Data Version Control (DVC)** to manage training and evaluation pipelines.
-- **BERT Tokenizer** (`bert-base-uncased`) for robust text processing.
-- **MLflow & DagsHub** for experiment tracking and model management.
-- **Amazon Elastic Container Registry (ECR)** for storing Docker images.
-- **Amazon Elastic Kubernetes Service (EKS)** for deploying the model as a containerized application.
-- **CI/CD Pipeline** using **GitHub Actions** for automated deployment on AWS.
+**PyTorch Implementation**: Fully built using `PyTorch` for efficient deep learning workflows.
+**Data Version Control (DVC)**: Manages training and evaluation pipelines effectively.
+**Transformer AutoTokenizer**: Uses `bert-base-uncased` for robust text processing.
+**Experiment Tracking & Model Management**: Integrated with `MLflow` and `DagsHub` for seamless tracking.
+**Containerized Deployment**: Docker images stored in `Amazon Elastic Container Registry (ECR)`.
+**Scalable Deployment**: Model deployed on `Amazon Elastic Kubernetes Service (EKS)` for production readiness.
+**Automated CI/CD**: End-to-end deployment automation using AWS and GitHub Actions.
 
 ## Prerequisites
 
-Ensure you have the following dependencies and services installed and configured:
+Ensure the following dependencies and services are installed and configured:
 
 - Python 3.10
-- AWS Account with necessary IAM permissions
+- AWS Account
 - AWS CLI
-- Docker Desktop (for local testing)
+- Docker Desktop (for local image testing)
 - DagsHub Account (for experiment tracking)
-- Git
+- Git & GitHub (for version control)
 
 ## Dataset
 
@@ -30,12 +30,12 @@ Ensure you have the following dependencies and services installed and configured
 **Description:**
 The dataset consists of two columns:
 
-- **Review**: Textual movie reviews.
-- **Sentiment**: Labels (Positive/Negative).
+- **Review**
+- **Sentiment**
 
 ## Model Architecture
 
-The sentiment analysis model consists of the following components:
+The SentimentAnalysis model consists of the following components:
 
 ### 1. Base Model (BERT)
 
