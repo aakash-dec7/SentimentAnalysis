@@ -5,11 +5,17 @@ This repository contains a **BERT-based** sentiment analysis model trained on th
 ## Features
 
 **PyTorch Implementation**: Fully built using `PyTorch` for efficient deep learning workflows.
+
 **Data Version Control (DVC)**: Manages training and evaluation pipelines effectively.
+
 **Transformer AutoTokenizer**: Uses `bert-base-uncased` for robust text processing.
+
 **Experiment Tracking & Model Management**: Integrated with `MLflow` and `DagsHub` for seamless tracking.
+
 **Containerized Deployment**: Docker images stored in `Amazon Elastic Container Registry (ECR)`.
+
 **Scalable Deployment**: Model deployed on `Amazon Elastic Kubernetes Service (EKS)` for production readiness.
+
 **Automated CI/CD**: End-to-end deployment automation using AWS and GitHub Actions.
 
 ## Prerequisites
@@ -221,7 +227,7 @@ Copy the `EXTERNAL-IP` and append `:5000` to access the application:
 http://<EXTERNAL-IP>:5000
 ```
 
-Your sentiment analysis model is now deployed and accessible online.
+The Sentiment-Analysis model is now deployed and accessible online.
 
 ## License
 
